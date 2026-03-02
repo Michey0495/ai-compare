@@ -32,6 +32,11 @@ JSON-RPC 2.0準拠のMCPツールサーバー
 - itemB (required): 比較対象B
 - context (optional): 比較の観点や補足
 
+## Pages
+- /: トップページ - 比較フォーム
+- /popular: 人気の比較トピック一覧
+- /result/{id}: 比較結果ページ
+
 ## AI公開チャネル
 - Agent Card: /.well-known/agent.json
 - MCP Server: /api/mcp

@@ -95,9 +95,16 @@ export default async function ResultPage({ params }: PageProps) {
 
       <div className="bg-white/5 border border-white/10 rounded-2xl p-6 mb-6">
         <div className="flex items-center justify-between mb-4">
-          <div className="text-center flex-1">
-            <div className="text-2xl font-bold text-white">{result.itemA}</div>
-            <div className="text-3xl font-bold text-rose-400 mt-1">{totalA}</div>
+          <div className={`text-center flex-1 ${result.winner === "A" ? "relative" : ""}`}>
+            {result.winner === "A" && (
+              <div className="text-xs font-bold text-rose-400 mb-1">WIN</div>
+            )}
+            <div className={`text-2xl font-bold ${result.winner === "A" ? "text-rose-400" : "text-white"}`}>
+              {result.itemA}
+            </div>
+            <div className={`text-3xl font-bold mt-1 ${result.winner === "A" ? "text-rose-400" : "text-white/60"}`}>
+              {totalA}
+            </div>
             <div className="text-white/40 text-xs">/ 50</div>
           </div>
           <div className="text-center px-4">
@@ -108,12 +115,19 @@ export default async function ResultPage({ params }: PageProps) {
                   : "bg-rose-500/20 text-rose-400"
               }`}
             >
-              {result.winner === "draw" ? "DRAW" : "WIN"}
+              {result.winner === "draw" ? "DRAW" : "VS"}
             </div>
           </div>
-          <div className="text-center flex-1">
-            <div className="text-2xl font-bold text-white">{result.itemB}</div>
-            <div className="text-3xl font-bold text-rose-400 mt-1">{totalB}</div>
+          <div className={`text-center flex-1 ${result.winner === "B" ? "relative" : ""}`}>
+            {result.winner === "B" && (
+              <div className="text-xs font-bold text-rose-400 mb-1">WIN</div>
+            )}
+            <div className={`text-2xl font-bold ${result.winner === "B" ? "text-rose-400" : "text-white"}`}>
+              {result.itemB}
+            </div>
+            <div className={`text-3xl font-bold mt-1 ${result.winner === "B" ? "text-rose-400" : "text-white/60"}`}>
+              {totalB}
+            </div>
             <div className="text-white/40 text-xs">/ 50</div>
           </div>
         </div>

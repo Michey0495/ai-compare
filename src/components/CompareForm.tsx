@@ -1,13 +1,43 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "sonner";
+
+const loadingMessages = [
+  "AIが分析中...",
+  "評価基準を選定中...",
+  "スコアを算出中...",
+  "結果をまとめています...",
+];
 
 export function CompareForm() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [loading, setLoading] = useState(false);
+  const [loadingIdx, setLoadingIdx] = useState(0);
   const [form, setForm] = useState({ itemA: "", itemB: "", context: "" });
+
+  useEffect(() => {
+    const a = searchParams.get("a");
+    const b = searchParams.get("b");
+    const c = searchParams.get("c");
+    if (a || b) {
+      setForm({
+        itemA: a ?? "",
+        itemB: b ?? "",
+        context: c ?? "",
+      });
+    }
+  }, [searchParams]);
+
+  useEffect(() => {
+    if (!loading) return;
+    const interval = setInterval(() => {
+      setLoadingIdx((prev) => (prev + 1) % loadingMessages.length);
+    }, 2000);
+    return () => clearInterval(interval);
+  }, [loading]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -16,6 +46,7 @@ export function CompareForm() {
       return;
     }
     setLoading(true);
+    setLoadingIdx(0);
     try {
       const res = await fetch("/api/compare", {
         method: "POST",
@@ -92,7 +123,7 @@ export function CompareForm() {
         disabled={loading}
         className="w-full py-4 bg-rose-500 text-white font-bold text-lg rounded-xl hover:bg-rose-400 hover:scale-[1.02] transition-all duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
       >
-        {loading ? "AIが比較中..." : "AIで比較する"}
+        {loading ? loadingMessages[loadingIdx] : "AIで比較する"}
       </button>
     </form>
   );
