@@ -123,7 +123,9 @@ export function CompareForm() {
         disabled={loading}
         className="w-full py-4 bg-rose-500 text-white font-bold text-lg rounded-xl hover:bg-rose-400 hover:scale-[1.02] transition-all duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
       >
-        {loading ? loadingMessages[loadingIdx] : "AIで比較する"}
+        <span aria-live="polite">
+          {loading ? loadingMessages[loadingIdx] : "AIで比較する"}
+        </span>
       </button>
     </form>
   );

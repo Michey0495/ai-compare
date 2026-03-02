@@ -1,5 +1,6 @@
 import { kv } from "@vercel/kv";
 import { notFound } from "next/navigation";
+import Link from "next/link";
 import type { Metadata } from "next";
 import type { CompareResult } from "@/types";
 import { ShareButtons } from "@/components/ShareButtons";
@@ -48,10 +49,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-function ScoreBar({ score, accent }: { score: number; accent: string }) {
+function ScoreBar({ score, accent, label }: { score: number; accent: string; label: string }) {
   const pct = (score / 10) * 100;
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-2" role="progressbar" aria-valuenow={score} aria-valuemin={1} aria-valuemax={10} aria-label={`${label}: ${score}/10`}>
       <div className="flex-1 h-2 bg-white/10 rounded-full overflow-hidden">
         <div
           className={`h-full rounded-full ${accent}`}
@@ -144,12 +145,12 @@ export default async function ResultPage({ params }: PageProps) {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-1">
                 <div className="text-xs text-white/50">{result.itemA}</div>
-                <ScoreBar score={c.itemAScore} accent="bg-rose-400" />
+                <ScoreBar score={c.itemAScore} accent="bg-rose-400" label={`${result.itemA} - ${c.name}`} />
                 <p className="text-xs text-white/40 mt-1">{c.itemAComment}</p>
               </div>
               <div className="space-y-1">
                 <div className="text-xs text-white/50">{result.itemB}</div>
-                <ScoreBar score={c.itemBScore} accent="bg-white/60" />
+                <ScoreBar score={c.itemBScore} accent="bg-white/60" label={`${result.itemB} - ${c.name}`} />
                 <p className="text-xs text-white/40 mt-1">{c.itemBComment}</p>
               </div>
             </div>
@@ -166,12 +167,12 @@ export default async function ResultPage({ params }: PageProps) {
       <ShareButtons shareText={shareText} shareUrl={shareUrl} />
 
       <div className="text-center mt-8">
-        <a
+        <Link
           href="/"
           className="inline-block bg-white/10 text-white font-medium px-6 py-3 rounded-xl hover:bg-white/20 transition-all duration-200 cursor-pointer"
         >
           別のものを比較する
-        </a>
+        </Link>
       </div>
 
       <script
@@ -192,7 +193,7 @@ export default async function ResultPage({ params }: PageProps) {
               name: "AIなんでも比較",
               url: siteUrl,
             },
-          }),
+          }).replace(/</g, "\\u003c"),
         }}
       />
     </div>

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -81,7 +82,7 @@ export default function PopularPage() {
             <h2 className="text-lg font-bold text-white/80 mb-3">{cat.title}</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
               {cat.items.map((item) => (
-                <a
+                <Link
                   key={`${item.itemA}-${item.itemB}`}
                   href={`/?a=${encodeURIComponent(item.itemA)}&b=${encodeURIComponent(item.itemB)}`}
                   className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 hover:bg-white/10 transition-all duration-200 cursor-pointer flex items-center gap-3"
@@ -89,7 +90,7 @@ export default function PopularPage() {
                   <span className="text-sm text-white/70">{item.itemA}</span>
                   <span className="text-rose-400/60 text-xs font-bold">VS</span>
                   <span className="text-sm text-white/70">{item.itemB}</span>
-                </a>
+                </Link>
               ))}
             </div>
           </div>
@@ -97,12 +98,12 @@ export default function PopularPage() {
       </div>
 
       <div className="text-center mt-12">
-        <a
+        <Link
           href="/"
           className="inline-block bg-rose-500 text-white font-bold px-8 py-3 rounded-xl hover:bg-rose-400 transition-all duration-200 cursor-pointer"
         >
           自分で比較する
-        </a>
+        </Link>
       </div>
     </div>
   );

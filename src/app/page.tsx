@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import Link from "next/link";
 import { CompareForm } from "@/components/CompareForm";
 
 const exampleComparisons = [
@@ -34,7 +35,7 @@ export default function Home() {
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
           {exampleComparisons.map((ex) => (
-            <a
+            <Link
               key={`${ex.itemA}-${ex.itemB}`}
               href={`/?a=${encodeURIComponent(ex.itemA)}&b=${encodeURIComponent(ex.itemB)}${ex.context ? `&c=${encodeURIComponent(ex.context)}` : ""}`}
               className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 hover:bg-white/10 transition-all duration-200 cursor-pointer flex items-center gap-3"
@@ -45,16 +46,16 @@ export default function Home() {
               {ex.context && (
                 <span className="text-xs text-white/30 ml-auto">{ex.context}</span>
               )}
-            </a>
+            </Link>
           ))}
         </div>
         <div className="text-center mt-3">
-          <a
+          <Link
             href="/popular"
             className="text-sm text-white/40 hover:text-white/60 transition-all duration-200 cursor-pointer"
           >
             もっと見る →
-          </a>
+          </Link>
         </div>
       </div>
 
