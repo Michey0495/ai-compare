@@ -19,7 +19,10 @@ export default function Home() {
           AI<span className="text-rose-400">なんでも</span>比較
         </h1>
         <p className="text-white/60 text-lg leading-relaxed">
-          2つのものを入力するだけ。AIが5つの観点から徹底比較します。
+          2つ入れるだけ。10秒でAIがスコア付き比較レポートを生成。
+        </p>
+        <p className="text-white/40 text-sm">
+          無料・登録不要 / 商品・技術・食べ物・都市...何でもOK
         </p>
       </div>
 
@@ -73,6 +76,37 @@ export default function Home() {
           <div className="text-white/60 text-sm">が公平に判定</div>
         </div>
       </div>
+
+      <div className="mt-12 bg-white/5 border border-white/10 rounded-2xl p-6 text-center space-y-3">
+        <h2 className="text-lg font-bold text-white">「どっちがいい？」を数字で決着</h2>
+        <p className="text-white/50 text-sm leading-relaxed">
+          ググっても似たような記事ばかり。AIなんでも比較なら、5つの観点×10点満点のスコアで定量的に比較。結果URLを送るだけで友達との議論に終止符を打てます。
+        </p>
+      </div>
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            name: "AIなんでも比較",
+            url: "https://ai-compare.ezoai.jp",
+            description: "2つのものを入力するだけでAIが5つの観点×10点満点で徹底比較するWebアプリ",
+            applicationCategory: "UtilitiesApplication",
+            operatingSystem: "Web",
+            offers: {
+              "@type": "Offer",
+              price: "0",
+              priceCurrency: "JPY",
+            },
+            author: {
+              "@type": "Organization",
+              name: "Ghostfee",
+            },
+          }).replace(/</g, "\\u003c"),
+        }}
+      />
     </div>
   );
 }
