@@ -1,0 +1,49 @@
+# AIなんでも比較
+> 2つのものをAIが多角的に徹底比較するサービス
+
+## URL
+https://ai-compare.ezoai.jp
+
+## 概要
+ユーザーが2つのものを入力すると、AIが5つの評価基準でスコア付きの詳細な比較結果を自動生成します。
+商品、サービス、技術、食べ物、都市など、あらゆるものを比較可能です。
+
+## 機能
+- 2つの項目を入力するだけの簡単操作
+- 5つの評価基準で多角的に分析
+- 各基準1-10点のスコアリング
+- 勝敗判定（A勝利 / B勝利 / 引き分け）
+- おすすめポイント付きの総合評価
+- SNSシェア機能（X、LINE、リンクコピー）
+
+## API
+### POST /api/compare
+2つのものを比較してAI分析結果を生成
+- Body: { "itemA": string, "itemB": string, "context"?: string }
+- Response: { "id": string }
+- 結果ページ: /result/{id}
+
+## MCP Server
+### Endpoint: /api/mcp
+JSON-RPC 2.0準拠のMCPツールサーバー
+
+### Tool: compare_items
+- itemA (required): 比較対象A
+- itemB (required): 比較対象B
+- context (optional): 比較の観点や補足
+
+## AI公開チャネル
+- Agent Card: /.well-known/agent.json
+- MCP Server: /api/mcp
+- LLMs.txt: /llms.txt
+- Robots.txt: /robots.txt
+
+## 技術スタック
+- Next.js 15 (App Router)
+- TypeScript
+- Tailwind CSS
+- Claude Haiku 4.5 (AI)
+- Vercel KV (データ保存)
+
+## 提供元
+Ghostfee - https://github.com/Michey0495

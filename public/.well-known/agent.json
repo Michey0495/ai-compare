@@ -1,0 +1,56 @@
+{
+  "name": "AIなんでも比較",
+  "description": "2つのものをAIが多角的に徹底比較するサービス。商品、サービス、技術、食べ物など何でもOK。5つの評価基準でスコア付きの詳細な比較結果を生成します。",
+  "url": "https://ai-compare.ezoai.jp",
+  "version": "1.0.0",
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false
+  },
+  "provider": {
+    "organization": "Ghostfee",
+    "url": "https://github.com/Michey0495"
+  },
+  "documentationUrl": "https://ai-compare.ezoai.jp/llms.txt",
+  "authentication": {
+    "schemes": ["none"]
+  },
+  "protocols": {
+    "mcp": {
+      "endpoint": "https://ai-compare.ezoai.jp/api/mcp",
+      "version": "2024-11-05",
+      "tools": [
+        {
+          "name": "compare_items",
+          "description": "2つのものをAIが多角的に比較します。5つの評価基準でスコア付き比較結果を生成。",
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "itemA": {
+                "type": "string",
+                "description": "比較対象A（例: iPhone, Python, 東京）"
+              },
+              "itemB": {
+                "type": "string",
+                "description": "比較対象B（例: Android, JavaScript, 大阪）"
+              },
+              "context": {
+                "type": "string",
+                "description": "比較の観点や補足情報（任意）"
+              }
+            },
+            "required": ["itemA", "itemB"]
+          }
+        }
+      ]
+    }
+  },
+  "skills": [
+    {
+      "id": "compare",
+      "name": "なんでも比較",
+      "description": "2つのものを5つの観点で徹底比較し、スコア付き結果を生成",
+      "tags": ["comparison", "analysis", "evaluation", "AI"]
+    }
+  ]
+}
