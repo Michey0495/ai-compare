@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
 
     const token = process.env.GITHUB_TOKEN;
     if (token) {
-      await fetch(
+      const res = await fetch(
         "https://api.github.com/repos/Michey0495/ai-compare/issues",
         {
           method: "POST",
@@ -34,10 +34,13 @@ export async function POST(req: NextRequest) {
           }),
         }
       );
+      if (!res.ok) {
+        return NextResponse.json({ ok: false, error: "送信に失敗しました" }, { status: 502 });
+      }
     }
 
     return NextResponse.json({ ok: true });
   } catch {
-    return NextResponse.json({ ok: true });
+    return NextResponse.json({ ok: false, error: "送信に失敗しました" }, { status: 500 });
   }
 }
